@@ -1,4 +1,4 @@
-This package implements HAProxy PROXY support
+This package implements [HAProxy PROXY](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) support
 
 Features
 
