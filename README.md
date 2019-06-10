@@ -1,3 +1,8 @@
+# proxyproto
+
+[![GoDoc](https://godoc.org/github.com/yousong/proxyproto?status.svg)](http://godoc.org/github.com/yousong/proxyproto) 
+[![Report card](https://goreportcard.com/badge/github.com/yousong/proxyproto)](https://goreportcard.com/report/github.com/yousong/proxyproto) 
+
 This package implements [HAProxy PROXY](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) support
 
 Features
