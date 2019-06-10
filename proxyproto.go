@@ -25,12 +25,12 @@ import (
 	"sync"
 )
 
-type ProxyVersion string
+type proxyVersion string
 
 const (
-	PROXY_V1    ProxyVersion = "v1"
-	PROXY_V2    ProxyVersion = "v2"
-	PROXY_V1_V2 ProxyVersion = "v1/v2"
+	PROXY_V1    proxyVersion = "v1"
+	PROXY_V2    proxyVersion = "v2"
+	PROXY_V1_V2 proxyVersion = "v1/v2"
 )
 
 const (
@@ -55,7 +55,7 @@ type proxyParser struct {
 	once *sync.Once
 	err  error
 
-	Version ProxyVersion
+	Version proxyVersion
 	Command string
 
 	SrcIP    net.IP
