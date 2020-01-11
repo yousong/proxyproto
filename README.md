@@ -13,6 +13,5 @@ Features
 
 # TODO
 
-- Test case
 - UnixAddr in net/unixsock.go
 - af of LocalAddr() and RemoteAddr()
