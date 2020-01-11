@@ -93,7 +93,7 @@ func (pp *proxyParser) parseProxyProto() error {
 		}
 		if string(buf[:6]) == "PROXY " {
 			pp.Version = PROXY_V1
-			return pp.parseProxyV1Proto(buf[6:])
+			return pp.parseProxyV1Proto(buf[6:8])
 		}
 	}
 	{
@@ -103,7 +103,7 @@ func (pp *proxyParser) parseProxyProto() error {
 		}
 		if bytes.Equal(buf[:12], []byte(PROXY_V2_SIG)) {
 			pp.Version = PROXY_V2
-			return pp.parseProxyV2Proto(buf[12:])
+			return pp.parseProxyV2Proto(buf[12:16])
 		}
 	}
 	return fmt.Errorf("unknown PROXY protocol")
@@ -136,7 +136,9 @@ out:
 		}
 	}
 	parts := strings.Split(string(b), " ")
-	if len(parts) != 5 {
+	if len(parts) == 1 && parts[0] == "UNKNOWN" {
+		return nil
+	} else if len(parts) != 5 {
 		return fmt.Errorf("proxy1: bad proxy line: expecting 5 elements, got %d", len(parts))
 	}
 	parseIP := func(s string, ver int) (net.IP, error) {
@@ -144,7 +146,7 @@ out:
 		if ip == nil {
 			return nil, fmt.Errorf("proxy1: bad ip address: %s", s)
 		}
-		if (ver == 4 && len(ip) == 4) || (ver == 6 && len(ip) == 16) {
+		if !(ver == 4 && ip.To4() != nil) && !(ver == 6 && len(ip) == 16) {
 			return nil, fmt.Errorf("proxy1: bad ipv%d addr: %s", ver, s)
 		}
 		return ip, nil
